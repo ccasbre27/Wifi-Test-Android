@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity
                     {
                         txtvSignal.setText(txtvSignal.getText().toString() + "\nWeak " + level + " = " + percentage);
                     }
-                    
+
                 }
             }
         }
