@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.ScanResult;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,7 +58,8 @@ public class MainActivity extends AppCompatActivity
         mWifiReceiver = new WifiReceiver();
 
         // se registra el receiver
-        IntentFilter mIntentFilter = new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+        // IntentFilter mIntentFilter = new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+        IntentFilter mIntentFilter = new IntentFilter(WifiManager.RSSI_CHANGED_ACTION);
         mIntentFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);
         registerReceiver(mWifiReceiver, mIntentFilter);
 
@@ -72,7 +74,8 @@ public class MainActivity extends AppCompatActivity
 
     public void onResume()
     {
-        registerReceiver(mWifiReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+        //registerReceiver(mWifiReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+        registerReceiver(mWifiReceiver, new IntentFilter(WifiManager.RSSI_CHANGED_ACTION));
         super.onResume();
     }
 
@@ -89,43 +92,40 @@ public class MainActivity extends AppCompatActivity
 
             if (state == WifiManager.WIFI_STATE_ENABLED)
             {
-                // Se obtiene la lista de accesos a wifi disponibles
-                wifiList = mWifiManager.getScanResults();
 
-                // recorremos cada acceso
-                for (ScanResult result : wifiList)
+                final WifiInfo connectionInfo = mWifiManager.getConnectionInfo();
+                //System.out.println("Connection Info " + connectionInfo.toString() + " " + connectionInfo.getRssi());
+
+
+                String value = "";
+
+                // Excellent >-50 dBm
+                if (connectionInfo.getRssi() > - 50)
                 {
-                    // La señal ronda entre 0-5
-                    int level = WifiManager.calculateSignalLevel(
-                            result.level,maxLevel);
-
-                    // para obtener el porcentaje
-                    int rssi = mWifiManager.getConnectionInfo().getRssi();
-                    int level2 = WifiManager.calculateSignalLevel(rssi, 10);
-                    int percentage = (int) ((level2/10.0)*100);
-
-                    // Excellent >-50 dBm
-                    if (result.level > - 50)
-                    {
-                        txtvSignal.setText(txtvSignal.getText().toString() + "\nExcellent " + level + " = " + percentage);
-                    }
-                    // Good -50 to -60 dBm
-                    else if (result.level > -60)
-                    {
-                        txtvSignal.setText(txtvSignal.getText().toString() + "\nGood " + level + " = " + percentage);
-                    }
-                    // Fair -60 to -70 dBm
-                    else if (result.level > -70)
-                    {
-                        txtvSignal.setText(txtvSignal.getText().toString() + "\nFair " + level + " = " + percentage);
-                    }
-                    // Weak < -70 dBm
-                    else if (result.level < -70)
-                    {
-                        txtvSignal.setText(txtvSignal.getText().toString() + "\nWeak " + level + " = " + percentage);
-                    }
-
+                    value = " Excellent ";
                 }
+                // Good -50 to -60 dBm
+                else if (connectionInfo.getRssi() > -60)
+                {
+                    value = " Good ";
+                }
+                // Fair -60 to -70 dBm
+                else if (connectionInfo.getRssi() > -70)
+                {
+                    value = " Fair ";
+                }
+                // Weak < -70 dBm
+                else if (connectionInfo.getRssi() < -70)
+                {
+                    value = " Weak ";
+                }
+                else
+                {
+                    value = "";
+                }
+
+                txtvSignal.setText( connectionInfo.getSSID() + ": " + connectionInfo.getRssi() + " " + value + "\n" );
+
             }
         }
     }

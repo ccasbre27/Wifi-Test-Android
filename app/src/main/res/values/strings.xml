@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Wifi-Test</string>
+    <string name="diagnostic_message">Tap to Start Diagnostic</string>
+    <string name="diagnosting_message">Diagnosting</string>
+    <string name="wifi_signal_strength">WIFI signal strength</string>
+    <string name="internet_connectivity">Internet connectivity</string>
+
+    <!-- Status -->
+    <string name="unknown">Unknown</string>
+    <string name="ok">Status Ok</string>
+    <string name="low">Low connectivity</string>
+    <string name="weak">Very weak</string>
+
+    <!-- Instructions -->
+    <string name="first_instruction">Start diagnostic anytime by taping into the Skype logo</string>
+    <string name="loading_instruction">Please wait while the diagnosis it\'s completed</string>
+    <string name="good_connection_instruction">Everything looks good, have a nive meeting</string>
+    <string name="danger_connection_instruction">Ops! The internet  looks a bit slow\n
+        Try connecting to another network. Contact your network provider
+    </string>
+    <string name="weak_connection_instruction">Something it\'s not right with your WIFI!\n
+        Move closer to the WIFI access point or move around to get a better signal.\n
+        Switch to another hotspot
+    </string>
 </resources>

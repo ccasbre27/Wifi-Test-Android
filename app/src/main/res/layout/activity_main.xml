@@ -1,17 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.itadmin.wifi_test.MainActivity">
 
+    <ImageView
+        android:id="@+id/imgvSkype"
+        android:src="@drawable/default_connection"
+        android:layout_height="200dp"
+        android:layout_width="200dp"
+        android:layout_gravity="center_horizontal" />
+
     <TextView
-        android:id="@+id/txtvSignal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgvSkype"
+        android:text="@string/diagnostic_message"
+        android:textAlignment="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/imgvInternet"
+            android:src="@drawable/default_wifi"
+            android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:layout_weight="1"
+            android:layout_centerHorizontal="true"/>
+
+
+        <ImageView
+            android:id="@+id/imgvWifi"
+            android:src="@drawable/default_internet"
+            android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:layout_weight="1"
+            android:layout_centerHorizontal="true"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:layout_marginBottom="2dp">
+
+        <TextView
+            android:src="@drawable/default_wifi"
+            android:layout_height="35dp"
+            android:layout_width="35dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="@string/wifi_signal_strength"/>
+
+        <TextView
+            android:src="@drawable/default_wifi"
+            android:layout_height="35dp"
+            android:layout_width="35dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="@string/internet_connectivity"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/txtvWifiStatus"
+            android:src="@drawable/default_wifi"
+            android:layout_height="35dp"
+            android:layout_width="35dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="@string/ok"/>
+
+        <TextView
+            android:id="@+id/txtvInternetStatus"
+            android:src="@drawable/default_wifi"
+            android:layout_height="35dp"
+            android:layout_width="35dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="@string/weak"/>
+
+
+    </LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/pgrbTest"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-</RelativeLayout>
+
+    <TextView
+        android:id="@+id/txtvSignal"
+        android:layout_below="@id/imgvSkype"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
