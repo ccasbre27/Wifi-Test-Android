@@ -12,12 +12,13 @@
 
     <ImageView
         android:id="@+id/imgvSkype"
-        android:src="@drawable/default_connection"
+        android:src="@drawable/default_skype"
         android:layout_height="200dp"
         android:layout_width="200dp"
         android:layout_gravity="center_horizontal" />
 
     <TextView
+        android:id="@+id/txtvDiagnosticMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/imgvSkype"
@@ -31,7 +32,7 @@
         android:layout_marginBottom="10dp">
 
         <ImageView
-            android:id="@+id/imgvInternet"
+            android:id="@+id/imgvWifi"
             android:src="@drawable/default_wifi"
             android:layout_height="50dp"
             android:layout_width="50dp"
@@ -40,7 +41,7 @@
 
 
         <ImageView
-            android:id="@+id/imgvWifi"
+            android:id="@+id/imgvInternet"
             android:src="@drawable/default_internet"
             android:layout_height="50dp"
             android:layout_width="50dp"
@@ -53,12 +54,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="2"
-        android:layout_marginBottom="2dp">
+        android:weightSum="2">
 
         <TextView
             android:src="@drawable/default_wifi"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_width="35dp"
             android:layout_weight="1"
             android:textAlignment="center"
@@ -66,7 +66,7 @@
 
         <TextView
             android:src="@drawable/default_wifi"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_width="35dp"
             android:layout_weight="1"
             android:textAlignment="center"
@@ -84,29 +84,30 @@
         <TextView
             android:id="@+id/txtvWifiStatus"
             android:src="@drawable/default_wifi"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_width="35dp"
             android:layout_weight="1"
             android:textAlignment="center"
-            android:text="@string/ok"/>
+            android:text="@string/unknown"/>
 
         <TextView
             android:id="@+id/txtvInternetStatus"
             android:src="@drawable/default_wifi"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_width="35dp"
             android:layout_weight="1"
             android:textAlignment="center"
-            android:text="@string/weak"/>
+            android:text="@string/unknown"/>
 
 
     </LinearLayout>
 
 
     <ProgressBar
-        android:id="@+id/pgrbTest"
+        android:id="@+id/progressBar"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        android:visibility="gone"/>
 
     <TextView
         android:layout_width="match_parent"
