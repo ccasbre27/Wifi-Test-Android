@@ -1,123 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.itadmin.wifi_test.MainActivity">
-
-    <ImageView
-        android:id="@+id/imgvSkype"
-        android:src="@drawable/default_skype"
-        android:layout_height="200dp"
-        android:layout_width="200dp"
-        android:layout_gravity="center_horizontal" />
-
-    <TextView
-        android:id="@+id/txtvDiagnosticMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgvSkype"
-        android:text="@string/diagnostic_message"
-        android:textAlignment="center"/>
+    tools:context="com.example.itadmin.wifi_test.MainActivity" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="2"
-        android:layout_marginBottom="10dp">
+        android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imgvWifi"
-            android:src="@drawable/default_wifi"
+            android:id="@+id/imgvSkype"
+            android:src="@drawable/default_skype"
+            android:layout_height="200dp"
+            android:layout_width="200dp"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/txtvDiagnosticMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/diagnostic_message"
+            android:textAlignment="center"
+            android:layout_marginBottom="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/imgvWifi"
+                android:src="@drawable/default_wifi"
+                android:layout_height="50dp"
+                android:layout_width="50dp"
+                android:layout_weight="1"
+                android:layout_centerHorizontal="true"/>
+
+
+            <ImageView
+                android:id="@+id/imgvInternet"
+                android:src="@drawable/default_internet"
+                android:layout_height="50dp"
+                android:layout_width="50dp"
+                android:layout_weight="1"
+                android:layout_centerHorizontal="true"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:text="@string/wifi_signal_strength"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:text="@string/internet_connectivity"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/txtvWifiStatus"
+                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:text="@string/unknown"/>
+
+            <TextView
+                android:id="@+id/txtvInternetStatus"
+                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:text="@string/unknown"/>
+
+
+        </LinearLayout>
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_width="50dp"
-            android:layout_weight="1"
-            android:layout_centerHorizontal="true"/>
+            android:visibility="gone"/>
 
 
-        <ImageView
-            android:id="@+id/imgvInternet"
-            android:src="@drawable/default_internet"
-            android:layout_height="50dp"
-            android:layout_width="50dp"
-            android:layout_weight="1"
-            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/txtvInstructionMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/first_instruction"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:layout_marginBottom="10dp"/>
 
+        <TextView
+            android:id="@+id/txtvHelpLink"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/txtvSignal"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="2">
-
-        <TextView
-            android:src="@drawable/default_wifi"
-            android:layout_height="wrap_content"
-            android:layout_width="35dp"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:text="@string/wifi_signal_strength"/>
-
-        <TextView
-            android:src="@drawable/default_wifi"
-            android:layout_height="wrap_content"
-            android:layout_width="35dp"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:text="@string/internet_connectivity"/>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="2"
-        android:layout_marginBottom="10dp">
-
-        <TextView
-            android:id="@+id/txtvWifiStatus"
-            android:src="@drawable/default_wifi"
-            android:layout_height="wrap_content"
-            android:layout_width="35dp"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:text="@string/unknown"/>
-
-        <TextView
-            android:id="@+id/txtvInternetStatus"
-            android:src="@drawable/default_wifi"
-            android:layout_height="wrap_content"
-            android:layout_width="35dp"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:text="@string/unknown"/>
-
-
-    </LinearLayout>
-
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:visibility="gone"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
-    <TextView
-        android:id="@+id/txtvSignal"
-        android:layout_below="@id/imgvSkype"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-</LinearLayout>
+</ScrollView>

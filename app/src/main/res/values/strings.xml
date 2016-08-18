@@ -7,6 +7,7 @@
 
     <!-- Status -->
     <string name="unknown">Unknown</string>
+    <string name="disconnected">Disconnected</string>
     <string name="ok">Status Ok</string>
     <string name="low">Low connectivity</string>
     <string name="weak">Very weak</string>
@@ -15,11 +16,28 @@
     <string name="first_instruction">Start diagnostic anytime by taping into the Skype logo</string>
     <string name="loading_instruction">Please wait while the diagnosis it\'s completed</string>
     <string name="good_connection_instruction">Everything looks good, have a nive meeting</string>
-    <string name="danger_connection_instruction">Ops! The internet  looks a bit slow\n
+    <string name="low_connection_instruction">Ops! The internet  looks a bit slow\n
         Try connecting to another network. Contact your network provider
     </string>
     <string name="weak_connection_instruction">Something it\'s not right with your WIFI!\n
         Move closer to the WIFI access point or move around to get a better signal.\n
         Switch to another hotspot
     </string>
+
+    <string name="tips_connection">
+        Having problems with your Skype for Business calls?
+        An Internet connection is the most likely culprit. A poor
+        Internet connection can cause low-quality audio and
+        video, delays, and dropped calls.\n\n
+        If you have a slow connection, the following tips
+        might help:\n\n
+        Move closer to the WiFi access point or move around
+        to get a better signal.\n\n
+        Switch to another hotspot if available.\n\n
+        Disable WiFi on your device and try enabling it again.\n\n
+        If your modem, or router is old, then everything will
+        seem to be running slow even with a fast connection. It
+        might be worth upgrading your hardware if all else fails.
+    </string>
+
 </resources>
