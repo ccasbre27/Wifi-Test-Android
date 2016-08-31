@@ -1,8 +1,11 @@
-package com.example.itadmin.wifi_test;
+package com.example.itadmin.wifi_test.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.example.itadmin.wifi_test.R;
 
 public class HelpActivity extends AppCompatActivity {
 
@@ -12,6 +15,9 @@ public class HelpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_help);
 
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        TextView txtvHelpTitle = (TextView) findViewById(R.id.txtvHelpTitle);
+        txtvHelpTitle.setText(getIntent().getStringExtra("quality"));
 
     }
 

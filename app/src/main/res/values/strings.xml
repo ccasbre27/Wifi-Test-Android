@@ -8,11 +8,13 @@
     <!-- Status -->
     <string name="unknown">Unknown</string>
     <string name="disconnected">Disconnected</string>
-    <string name="ok">Status Ok</string>
-    <string name="low">Low connectivity</string>
-    <string name="weak">Very weak</string>
+    <string name="excellent">Excellent</string>
+    <string name="good">Good</string>
+    <string name="moderate">Moderate</string>
+    <string name="poor">Poor</string>
 
     <!-- Instructions -->
+    <string name="unknown_instruction">Unknown status</string>
     <string name="first_instruction">Start diagnostic anytime by taping into the Skype logo</string>
     <string name="loading_instruction">Please wait while the diagnosis it\'s completed</string>
     <string name="good_connection_instruction">Everything looks good, have a nive meeting</string>
