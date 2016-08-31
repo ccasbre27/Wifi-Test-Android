@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // se verifica si el wifi está habilitado
         if (!mWifiManager.isWifiEnabled())
         {
-            connectionQuality = ConnectionQuality.UNKNOWN;
+            connectionQuality = ConnectionQuality.POOR;
             txtvWifiSignal.setText(R.string.disconnected);
 
             imgvWifiSignal.setImageResource(R.drawable.weak_wifi);
@@ -274,11 +274,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 imgvInternetSignal.setImageResource(R.drawable.default_internet);
                 txtvInternetSignal.setText(R.string.unknown);
                 break;
+
+
         }
 
         // check if the internet is disabled
         if(!isNetworkAvailable())
         {
+            imgvInternetSignal.setImageResource(R.drawable.weak_internet);
             txtvInternetSignal.setText(R.string.disconnected);
         }
     }
