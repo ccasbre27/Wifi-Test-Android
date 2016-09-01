@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -55,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         // referencia los componentes
         imgvSkypeLogo = (ImageView) findViewById(R.id.imgvSkype);
         txtvDiagnosticMessage = (TextView) findViewById(R.id.txtvDiagnosticMessage);
@@ -68,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtvHelpLink = (TextView) findViewById(R.id.txtvHelpLink);
 
         txtvHelpLink.setText(Html.fromHtml("Didn't work? <font color=#36B2E4>Try another options</font>"));
+
+        txtvDiagnosticMessage.setText(Html.fromHtml("Tap to<br><big>Start</big><br>Diagnostic"));
 
         // click listener de la imagen
         imgvSkypeLogo.setOnClickListener(this);

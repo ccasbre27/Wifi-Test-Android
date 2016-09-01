@@ -1,138 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".activity.MainActivity" >
+    android:fitsSystemWindows="true"
+    tools:context="com.example.itadmin.test1.MainActivity">
 
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <ImageView
-            android:id="@+id/imgvSkype"
-            android:src="@drawable/default_skype"
-            android:layout_height="200dp"
-            android:layout_width="200dp"
-            android:layout_gravity="center_horizontal" />
-
-        <TextView
-            android:id="@+id/txtvDiagnosticMessage"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/diagnostic_message"
-            android:textAlignment="center"
-            android:layout_marginBottom="10dp"/>
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/white"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:elevation="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="2"
-            android:layout_marginBottom="10dp">
-
-            <ImageView
-                android:id="@+id/imgvWifi"
-                android:src="@drawable/default_wifi"
-                android:layout_height="50dp"
-                android:layout_width="50dp"
-                android:layout_weight="1"
-                android:layout_centerHorizontal="true"/>
-
-
-            <ImageView
-                android:id="@+id/imgvInternet"
-                android:src="@drawable/default_internet"
-                android:layout_height="50dp"
-                android:layout_width="50dp"
-                android:layout_weight="1"
-                android:layout_centerHorizontal="true"/>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="2">
-
-            <TextView
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="35dp"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:text="@string/wifi_signal_strength"/>
+                android:layout_margin="5dp">
 
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="35dp"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:text="@string/internet_connectivity"/>
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/hpe_logo"/>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center"
+                    android:textSize="15dp"
+                    android:layout_centerVertical="true" />
 
-        </LinearLayout>
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="2"
-            android:layout_marginBottom="10dp">
+    </android.support.design.widget.AppBarLayout>
 
-            <TextView
-                android:id="@+id/txtvWifiStatus"
-                android:layout_height="wrap_content"
-                android:layout_width="35dp"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:text="@string/unknown"/>
-
-            <TextView
-                android:id="@+id/txtvInternetStatus"
-                android:layout_height="wrap_content"
-                android:layout_width="35dp"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:text="@string/unknown"/>
+    <include layout="@layout/content_main" />
 
 
-        </LinearLayout>
 
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:visibility="gone"/>
-
-
-        <TextView
-            android:id="@+id/txtvInstructionMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/first_instruction"
-            android:textSize="20dp"
-            android:textAlignment="center"
-            android:layout_marginBottom="10dp"/>
-
-        <TextView
-            android:id="@+id/txtvHelpLink"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:textAlignment="center"
-            android:visibility="invisible"/>
-
-        <TextView
-            android:id="@+id/txtvSignal"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-</ScrollView>
+</android.support.design.widget.CoordinatorLayout>

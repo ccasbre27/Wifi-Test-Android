@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Wifi-Test</string>
+    <string name="app_name">Mobile Doctor</string>
     <string name="diagnostic_message">Tap to Start Diagnostic</string>
     <string name="diagnosting_message">Diagnosting</string>
     <string name="wifi_signal_strength">WIFI signal strength</string>
