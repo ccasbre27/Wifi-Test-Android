@@ -15,7 +15,7 @@
 
     <!-- Instructions -->
     <string name="unknown_instruction">Unknown status</string>
-    <string name="first_instruction">Start diagnostic anytime by taping into the Skype logo</string>
+    <string name="first_instruction">Start diagnostic anytime by\ntaping into the Skype logo</string>
     <string name="loading_instruction">Please wait while the diagnosis it\'s completed</string>
     <string name="good_connection_instruction">Everything looks good, have a nive meeting</string>
     <string name="low_connection_instruction">Ops! The internet  looks a bit slow\n

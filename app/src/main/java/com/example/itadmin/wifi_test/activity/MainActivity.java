@@ -2,6 +2,7 @@ package com.example.itadmin.wifi_test.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.itadmin.wifi_test.R;
 import com.facebook.network.connectionclass.ConnectionClassManager;
 import com.facebook.network.connectionclass.ConnectionQuality;
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         txtvHelpLink.setText(Html.fromHtml("Didn't work? <font color=#36B2E4>Try another options</font>"));
 
-        txtvDiagnosticMessage.setText(Html.fromHtml("Tap to<br><big>Start</big><br>Diagnostic"));
+        txtvDiagnosticMessage.setText(Html.fromHtml("Tap to<br><big><b>Start</b></big><br>Diagnostic"));
 
         // click listener de la imagen
         imgvSkypeLogo.setOnClickListener(this);
@@ -212,6 +214,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 imgvWifiSignal.setImageResource(R.drawable.good_wifi);
                 txtvWifiSignal.setText(R.string.excellent);
+                txtvWifiSignal.setTextColor(getResources().getColor(R.color.connection_good, null));
 
             }
             // Good -50 to -60 dBm
@@ -222,6 +225,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 imgvWifiSignal.setImageResource(R.drawable.good_wifi);
                 txtvWifiSignal.setText(R.string.good);
+                txtvWifiSignal.setTextColor(getResources().getColor(R.color.connection_good, null));
 
             }
             // LOW -60 to -70 dBm
@@ -231,6 +235,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 connectionQuality = ConnectionQuality.MODERATE;
                 imgvWifiSignal.setImageResource(R.drawable.low_wifi);
                 txtvWifiSignal.setText(R.string.moderate);
+                txtvWifiSignal.setTextColor(getResources().getColor(R.color.connection_low, null));
 
             }
             // Weak < -70 dBm
@@ -240,6 +245,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 connectionQuality = ConnectionQuality.POOR;
                 imgvWifiSignal.setImageResource(R.drawable.weak_wifi);
                 txtvWifiSignal.setText(R.string.poor);
+                txtvWifiSignal.setTextColor(getResources().getColor(R.color.connection_weak, null));
 
             }
 
@@ -259,26 +265,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case EXCELLENT:
                 imgvInternetSignal.setImageResource(R.drawable.good_internet);
                 txtvInternetSignal.setText(R.string.excellent);
+                txtvInternetSignal.setTextColor(Color.parseColor(Integer.toHexString(getResources().getColor(R.color.connection_good, null) & 0x00ffffff)));
                 break;
 
             case GOOD:
                 imgvInternetSignal.setImageResource(R.drawable.good_internet);
                 txtvInternetSignal.setText(R.string.good);
+                txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_good, null));
                 break;
 
             case MODERATE:
                 imgvInternetSignal.setImageResource(R.drawable.low_internet);
                 txtvInternetSignal.setText(R.string.moderate);
+                txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_low, null));
                 break;
 
             case POOR:
                 imgvInternetSignal.setImageResource(R.drawable.weak_internet);
                 txtvInternetSignal.setText(R.string.poor);
+                txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_weak, null));
                 break;
 
             case UNKNOWN:
                 imgvInternetSignal.setImageResource(R.drawable.default_internet);
                 txtvInternetSignal.setText(R.string.unknown);
+                txtvInternetSignal.setTextColor(getResources().getColor(R.color.gray, null));
                 break;
 
 
@@ -289,23 +300,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             imgvInternetSignal.setImageResource(R.drawable.weak_internet);
             txtvInternetSignal.setText(R.string.disconnected);
+            txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_weak, null));
+
         }
     }
 
     private void updateSkypeLogo(ConnectionQuality status)
     {
+        int resourceId = R.drawable.cloud_default;
+
         // según el valor que tenga se actualiza la imagen de skype
         switch (status)
         {
             case UNKNOWN:
-                imgvSkypeLogo.setImageResource(R.drawable.default_skype);
+                resourceId = R.drawable.cloud_default;
                 txtvInstructionMessage.setText(R.string.unknown_instruction);
                 txtvHelpLink.setVisibility(View.VISIBLE);
                 txtvHelpLink.setMovementMethod(LinkMovementMethod.getInstance());
                 break;
 
             case POOR:
-                imgvSkypeLogo.setImageResource(R.drawable.weak_skype);
+                resourceId = R.drawable.cloud_weak;
                 txtvInstructionMessage.setText(R.string.weak_connection_instruction);
                 txtvHelpLink.setVisibility(View.VISIBLE);
                 txtvHelpLink.setMovementMethod(LinkMovementMethod.getInstance());
@@ -314,7 +329,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case MODERATE:
-                imgvSkypeLogo.setImageResource(R.drawable.low_skype);
+                resourceId = R.drawable.cloud_low;
                 txtvInstructionMessage.setText(R.string.low_connection_instruction);
                 txtvHelpLink.setVisibility(View.VISIBLE);
                 txtvHelpLink.setMovementMethod(LinkMovementMethod.getInstance());
@@ -324,17 +339,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case GOOD:
             case EXCELLENT:
-                imgvSkypeLogo.setImageResource(R.drawable.good_skype);
+                resourceId = R.drawable.cloud_good;
                 txtvInstructionMessage.setText(R.string.good_connection_instruction);
 
                 break;
         }
+
+        Glide.with(this)
+                .load(resourceId)
+                .into(imgvSkypeLogo);
     }
 
 
     private void resetActivity()
     {
-        imgvSkypeLogo.setImageResource(R.drawable.default_skype);
+        Glide.with(this)
+                .load(R.drawable.cloud_default)
+                .into(imgvSkypeLogo);
 
         imgvWifiSignal.setImageResource(R.drawable.default_wifi);
         txtvWifiSignal.setText(R.string.unknown);

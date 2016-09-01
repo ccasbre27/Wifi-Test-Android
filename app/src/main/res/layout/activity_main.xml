@@ -18,7 +18,8 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/white"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            android:elevation="10dp">
+            android:elevation="20dp"
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -43,6 +44,8 @@
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
+
+
 
     <include layout="@layout/content_main" />
 

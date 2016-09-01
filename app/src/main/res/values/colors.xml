@@ -4,4 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="connection_good">#6BA92B</color>
+    <color name="connection_low">#FAB040</color>
+    <color name="connection_weak">#ED1B22</color>
+    <color name="gray">#808080</color>
+
 </resources>
