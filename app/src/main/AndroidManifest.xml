@@ -23,8 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name="com.example.itadmin.wifi_test.activity.HelpActivity"
-            android:parentActivityName="com.example.itadmin.wifi_test.activity.MainActivity">
+            android:parentActivityName="com.example.itadmin.wifi_test.activity.MainActivity"
+            android:theme="@style/AppSecondTheme">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data

@@ -2,6 +2,7 @@ package com.example.itadmin.wifi_test.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
@@ -57,6 +58,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     ConnectionQuality CONNECTION_QUALITY = ConnectionQuality.UNKNOWN;
 
+    CustomConnectionQuality customConnectionQuality;
+
+    final String colorConnectionGood = "#6BA92B";
+    final String colorConnectionModerate = "#FAB040";
+    final String colorConnectionPoor = "#ED1B22";
+    final String colorGray = "#808080";
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -95,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mDeviceBandwidthSampler = DeviceBandwidthSampler.getInstance();
 
-
+        customConnectionQuality = new CustomConnectionQuality();
     }
 
     public void onClick(View view)
@@ -106,21 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 Intent intent = new Intent(MainActivity.this,HelpActivity.class);
 
-                switch (CONNECTION_QUALITY)
-                {
-                    case UNKNOWN:
-                        intent.putExtra("quality","UNKNOWN");
-                        break;
-
-                    case POOR:
-                        intent.putExtra("quality","POOR");
-                        break;
-
-                    case MODERATE:
-                        intent.putExtra("quality","MODERATE");
-                        break;
-
-                }
+                intent.putExtra("quality",customConnectionQuality);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
 
@@ -154,6 +148,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ConnectionQuality wifiQuality = getWifiStatus();
                 setInternetQuality(internetQuality);
                 //wifiStatus = CONNECTION_STATUS.LOW;
+
+                customConnectionQuality.wifiQuality = wifiQuality;
+                customConnectionQuality.internetQuality = internetQuality;
 
                 updateUI(wifiQuality,internetQuality);
 
@@ -199,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 imgvWifiSignal.setImageResource(R.drawable.wifi_good);
                 txtvWifiSignal.setText(R.string.excellent);
-                txtvWifiSignal.setTextColor(getResources().getColor(R.color.connection_good, null));
+                txtvWifiSignal.setTextColor(Color.parseColor(colorConnectionGood));
 
             }
             // Good -50 to -60 dBm
@@ -210,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 imgvWifiSignal.setImageResource(R.drawable.wifi_good);
                 txtvWifiSignal.setText(R.string.good);
-                txtvWifiSignal.setTextColor(getResources().getColor(R.color.connection_good, null));
+                txtvWifiSignal.setTextColor(Color.parseColor(colorConnectionGood));
 
             }
             // LOW -60 to -70 dBm
@@ -220,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 connectionQuality = ConnectionQuality.MODERATE;
                 imgvWifiSignal.setImageResource(R.drawable.wifi_moderate);
                 txtvWifiSignal.setText(R.string.moderate);
-                txtvWifiSignal.setTextColor(getResources().getColor(R.color.connection_moderate, null));
+                txtvWifiSignal.setTextColor(Color.parseColor(colorConnectionModerate));
 
             }
             // Weak < -70 dBm
@@ -230,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 connectionQuality = ConnectionQuality.POOR;
                 imgvWifiSignal.setImageResource(R.drawable.wifi_poor);
                 txtvWifiSignal.setText(R.string.poor);
-                txtvWifiSignal.setTextColor(getResources().getColor(R.color.connection_poor, null));
+                txtvWifiSignal.setTextColor(Color.parseColor(colorConnectionPoor));
 
             }
 
@@ -250,31 +247,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case EXCELLENT:
                 imgvInternetSignal.setImageResource(R.drawable.internet_good);
                 txtvInternetSignal.setText(R.string.excellent);
-                txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_good, null));
+                txtvInternetSignal.setTextColor(Color.parseColor(colorConnectionGood));
                 break;
 
             case GOOD:
                 imgvInternetSignal.setImageResource(R.drawable.internet_good);
                 txtvInternetSignal.setText(R.string.good);
-                txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_good, null));
+                txtvInternetSignal.setTextColor(Color.parseColor(colorConnectionGood));
                 break;
 
             case MODERATE:
                 imgvInternetSignal.setImageResource(R.drawable.internet_moderate);
                 txtvInternetSignal.setText(R.string.moderate);
-                txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_moderate, null));
+                txtvInternetSignal.setTextColor(Color.parseColor(colorConnectionModerate));
                 break;
 
             case POOR:
                 imgvInternetSignal.setImageResource(R.drawable.internet_poor);
                 txtvInternetSignal.setText(R.string.poor);
-                txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_poor, null));
+                txtvInternetSignal.setTextColor(Color.parseColor(colorConnectionPoor));
                 break;
 
             case UNKNOWN:
                 imgvInternetSignal.setImageResource(R.drawable.internet_default);
                 txtvInternetSignal.setText(R.string.unknown);
-                txtvInternetSignal.setTextColor(getResources().getColor(R.color.gray, null));
+                txtvInternetSignal.setTextColor(Color.parseColor(colorGray));
                 break;
 
 
@@ -285,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             imgvInternetSignal.setImageResource(R.drawable.internet_default);
             txtvInternetSignal.setText(R.string.disconnected);
-            txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_poor, null));
+            txtvInternetSignal.setTextColor(Color.parseColor(colorConnectionPoor));
 
         }
     }
@@ -351,8 +348,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case GOOD:
                         // SfB Experience indicator: Good
                         resourceMainLogoId = R.drawable.cloud_good;
-                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_good,null));
-                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_good,null));
+                        vTopLine.setBackgroundColor(Color.parseColor(colorConnectionGood));
+                        vBottomLine.setBackgroundColor(Color.parseColor(colorConnectionGood));
                         imgvAlert.setImageResource(R.drawable.alert_good);
                         txtvAlertMessage.setText(R.string.sm_gw_gi);
                         txtvRecommendationMessage.setText(R.string.rm_gw_gi);
@@ -361,8 +358,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case MODERATE:
                         // SfB Experience indicator: Warning !
                         resourceMainLogoId = R.drawable.cloud_moderate;
-                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_moderate,null));
-                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_moderate,null));
+                        vTopLine.setBackgroundColor(Color.parseColor(colorConnectionModerate));
+                        vBottomLine.setBackgroundColor(Color.parseColor(colorConnectionModerate));
                         imgvAlert.setImageResource(R.drawable.alert_moderate);
                         txtvAlertMessage.setText(R.string.sm_gw_mi);
                         txtvRecommendationMessage.setText(R.string.rm_gw_mi);
@@ -373,8 +370,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case POOR:
                         // SfB Experience indicator:  Bad !
                         resourceMainLogoId = R.drawable.cloud_poor;
-                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_poor,null));
-                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_poor,null));
+                        vTopLine.setBackgroundColor(Color.parseColor(colorConnectionPoor));
+                        vBottomLine.setBackgroundColor(Color.parseColor(colorConnectionPoor));
                         imgvAlert.setImageResource(R.drawable.alert_poor);
                         txtvAlertMessage.setText(R.string.sm_gw_pi);
                         txtvRecommendationMessage.setText(R.string.rm_gw_pi);
@@ -396,8 +393,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case GOOD:
                         // SfB Experience indicator: Warning !
                         resourceMainLogoId = R.drawable.cloud_moderate;
-                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_moderate,null));
-                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_moderate,null));
+                        vTopLine.setBackgroundColor(Color.parseColor(colorConnectionModerate));
+                        vBottomLine.setBackgroundColor(Color.parseColor(colorConnectionModerate));
                         imgvAlert.setImageResource(R.drawable.alert_moderate);
                         txtvAlertMessage.setText(R.string.sm_mw_gi);
                         txtvRecommendationMessage.setText(R.string.rm_mw_gi);
@@ -408,8 +405,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case MODERATE:
                         // SfB Experience indicator: Warning !
                         resourceMainLogoId = R.drawable.cloud_moderate;
-                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_moderate,null));
-                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_moderate,null));
+                        vTopLine.setBackgroundColor(Color.parseColor(colorConnectionModerate));
+                        vBottomLine.setBackgroundColor(Color.parseColor(colorConnectionModerate));
                         imgvAlert.setImageResource(R.drawable.alert_moderate);
                         txtvAlertMessage.setText(R.string.sm_mw_mi);
                         txtvRecommendationMessage.setText(R.string.rm_mw_mi);
@@ -420,8 +417,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case POOR:
                         // SfB Experience indicator:  Bad !
                         resourceMainLogoId = R.drawable.cloud_poor;
-                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_poor,null));
-                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_poor,null));
+                        vTopLine.setBackgroundColor(Color.parseColor(colorConnectionPoor));
+                        vBottomLine.setBackgroundColor(Color.parseColor(colorConnectionPoor));
                         imgvAlert.setImageResource(R.drawable.alert_poor);
                         txtvAlertMessage.setText(R.string.sm_mw_pi);
                         txtvRecommendationMessage.setText(R.string.rm_mw_pi);
@@ -449,8 +446,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case POOR:
                         // SfB Experience indicator:  Bad !
                         resourceMainLogoId = R.drawable.cloud_poor;
-                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_poor,null));
-                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_poor,null));
+                        vTopLine.setBackgroundColor(Color.parseColor(colorConnectionPoor));
+                        vBottomLine.setBackgroundColor(Color.parseColor(colorConnectionPoor));
                         imgvAlert.setImageResource(R.drawable.alert_poor);
                         txtvAlertMessage.setText(R.string.sm_pw_pi);
                         txtvRecommendationMessage.setText(R.string.rm_pw_pi);
@@ -472,8 +469,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case GOOD:
                         // SfB Experience indicator: Good
                         resourceMainLogoId = R.drawable.cloud_good;
-                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_good,null));
-                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_good,null));
+                        vTopLine.setBackgroundColor(Color.parseColor(colorConnectionGood));
+                        vBottomLine.setBackgroundColor(Color.parseColor(colorConnectionGood));
                         imgvAlert.setImageResource(R.drawable.alert_good);
                         txtvAlertMessage.setText(R.string.sm_dw_gi);
                         txtvRecommendationMessage.setText(R.string.rm_dw_gi);
@@ -482,8 +479,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case MODERATE:
                         // SfB Experience indicator: Warning !
                         resourceMainLogoId = R.drawable.cloud_moderate;
-                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_moderate,null));
-                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_moderate,null));
+                        vTopLine.setBackgroundColor(Color.parseColor(colorConnectionModerate));
+                        vBottomLine.setBackgroundColor(Color.parseColor(colorConnectionModerate));
                         imgvAlert.setImageResource(R.drawable.alert_moderate);
                         txtvAlertMessage.setText(R.string.sm_dw_mi);
                         txtvRecommendationMessage.setText(R.string.rm_dw_mi);
@@ -494,8 +491,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case POOR:
                         // SfB Experience indicator:  Bad !
                         resourceMainLogoId = R.drawable.cloud_poor;
-                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_poor,null));
-                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_poor,null));
+                        vTopLine.setBackgroundColor(Color.parseColor(colorConnectionPoor));
+                        vBottomLine.setBackgroundColor(Color.parseColor(colorConnectionPoor));
                         imgvAlert.setImageResource(R.drawable.alert_poor);
                         txtvAlertMessage.setText(R.string.sm_dw_pi);
                         txtvRecommendationMessage.setText(R.string.rm_dw_pi);
@@ -525,10 +522,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         imgvWifiSignal.setImageResource(R.drawable.wifi_default);
         txtvWifiSignal.setText(R.string.unknown);
-        txtvWifiSignal.setTextColor(getResources().getColor(R.color.gray, null));
+        txtvWifiSignal.setTextColor(Color.parseColor(colorGray));
         imgvInternetSignal.setImageResource(R.drawable.internet_default);
         txtvInternetSignal.setText(R.string.unknown);
-        txtvInternetSignal.setTextColor(getResources().getColor(R.color.gray, null));
+        txtvInternetSignal.setTextColor(Color.parseColor(colorGray));
 
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setIndeterminate(true);
