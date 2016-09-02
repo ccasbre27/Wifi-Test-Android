@@ -5,8 +5,8 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="connection_good">#6BA92B</color>
-    <color name="connection_low">#FAB040</color>
-    <color name="connection_weak">#ED1B22</color>
+    <color name="connection_moderate">#FAB040</color>
+    <color name="connection_poor">#ED1B22</color>
     <color name="gray">#808080</color>
     <color name="green">#35A754</color>
 

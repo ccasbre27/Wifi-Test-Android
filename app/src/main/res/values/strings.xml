@@ -103,61 +103,65 @@
 
     <!-- Recommendation messages -->
     <string name="rm_gw_gi">
-        Instant Messaging: OK\n
-        Audio Calls:  OK
+        Everything looks good, have a nice meeting !
     </string>
 
     <string name="rm_gw_mi">
-        Instant Messaging: OK\n
-        Audio Calls: Not OK
+        Insufficient Internet bandwidth for audio calls.\n
+        Home Wi-Fi: check internet connectivity with your SP\n
+        Public Wi-Fi: Try to connect to another public Wi-Fi hotspot\n
     </string>
 
     <string name="rm_gw_pi">
-        Instant Messaging: Not Ok\n
-        Audio Calls: Not OK
+        Insufficient Internet bandwidth for  SfB.\n
+        Home Wi-Fi: check internet connectivity with your SP\n
+        Public Wi-Fi: Try to connect to another hotspot\n
     </string>
 
     <string name="rm_mw_gi">
-        Instant Messaging: OK\n
-        Audio Calls: Warning
+        Bad SfB audio calls due to degraded Wi-Fi conditions.\n
+        Try to get closer to the Wi-Fi Access Point\n
+        Public Wi-Fi: try to connect to another hotspot\n
     </string>
 
     <string name="rm_mw_mi">
-        Instant Messaging: OK\n
-        Audio Calls: Not OK
+        Insufficient Internet bandwidth for  SfB audio calls.\n
+        Home Wi-Fi: check internet connectivity with your SP\n
+        Public Wi-Fi: Try to connect to another hotspot\n
     </string>
 
     <string name="rm_mw_pi">
-        Instant Messaging: Not Ok\n
-        Audio Calls: Not OK
+        Insufficient Internet bandwidth for  SfB.\n
+        Home Wi-Fi: check internet connectivity with your SP\n
+        Public Wi-Fi: Try to connect to another hotspot\n
     </string>
 
     <string name="rm_pw_gi">
-        Should not occur otherwise issue with the measurement thresholds
+        Everything looks good, have a nice meeting !
     </string>
 
     <string name="rm_pw_mi">
-        Should not occur otherwise issue with the measurement thresholds
+
     </string>
 
     <string name="rm_pw_pi">
-        Instant Messaging: Not Ok\n
-        Audio Calls: Not OK
+        Insufficient Internet bandwidth for  SfB.\n
+        Home Wi-Fi: check internet connectivity with your SP\n
+        Public Wi-Fi: Try to connect to another hotspot\n
     </string>
 
     <string name="rm_dw_gi">
-        Instant Messaging: OK\n
-        Audio Calls:  OK
+        Everything looks good, have a nice meeting !
     </string>
 
     <string name="rm_dw_mi">
-        Instant Messaging: OK\n
-        Audio Calls: Not OK
+        Insufficient Internet bandwidth for SfB audio calls.\n
+        Use Skype for Business dial-back capability for joining meetings\n
     </string>
 
     <string name="rm_dw_pi">
-        Instant Messaging: Not OK\n
-        Audio Calls: Not OK
+        Insufficient Internet bandwidth for SfB audio calls.\n
+        Use Skype for Business dial-back capability for joining meetings\n
     </string>
 
     <!-- Recommendations second screen messages -->

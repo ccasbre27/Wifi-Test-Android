@@ -2,7 +2,6 @@ package com.example.itadmin.wifi_test.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
@@ -17,6 +16,7 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 {
     WifiManager mWifiManager;
 
-    ImageView imgvSkypeLogo;
+    ImageView imgvMainLogo;
     TextView txtvDiagnosticMessage;
     TextView txtvSignal;
     ImageView imgvWifiSignal;
@@ -42,9 +42,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView imgvInternetSignal;
     TextView txtvInternetSignal;
     ProgressBar progressBar;
-    TextView txtvInstructionMessage;
+    TextView txtvRecommendationMessage;
     TextView txtvHelpLink;
+    View vTopLine;
+    ImageView imgvAlert;
+    TextView txtvAlertMessage;
+    View vBottomLine;
     DeviceBandwidthSampler mDeviceBandwidthSampler;
+    RelativeLayout rlAlert;
 
     final String mURL = "http://lyncdiscover.hpe.com/dialin";
 
@@ -62,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
 
         // referencia los componentes
-        imgvSkypeLogo = (ImageView) findViewById(R.id.imgvSkype);
+        imgvMainLogo = (ImageView) findViewById(R.id.imgvSkype);
         txtvDiagnosticMessage = (TextView) findViewById(R.id.txtvDiagnosticMessage);
         txtvSignal = (TextView) findViewById(R.id.txtvSignal);
         imgvWifiSignal = (ImageView) findViewById(R.id.imgvWifi);
@@ -70,13 +75,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imgvInternetSignal = (ImageView) findViewById(R.id.imgvInternet);
         txtvInternetSignal = (TextView) findViewById(R.id.txtvInternetStatus);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        txtvInstructionMessage = (TextView) findViewById(R.id.txtvInstructionMessage);
+        txtvRecommendationMessage = (TextView) findViewById(R.id.txtvRecommendationMessage);
         txtvHelpLink = (TextView) findViewById(R.id.txtvHelpLink);
+
+        vTopLine = findViewById(R.id.vTopLine);
+        imgvAlert = (ImageView) findViewById(R.id.imgvAlert);
+        txtvAlertMessage = (TextView) findViewById(R.id.txtvAlertMessage);
+        vBottomLine = findViewById(R.id.vBottomLine);
+
+        rlAlert = (RelativeLayout) findViewById(R.id.rlAlert);
 
         txtvHelpLink.setText(Html.fromHtml("Didn't work? <font color=#36B2E4>Try another options</font>"));
 
         // click listener de la imagen
-        imgvSkypeLogo.setOnClickListener(this);
+        imgvMainLogo.setOnClickListener(this);
         txtvHelpLink.setOnClickListener(this);
 
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
@@ -143,18 +155,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setInternetQuality(internetQuality);
                 //wifiStatus = CONNECTION_STATUS.LOW;
 
-                // se verifica si el valor de wifi es menor, si es así entonces se pasa dicho enum para que establezca
-                // la imagen de skype con el valor que le corresponde.
-                // en otro escenario internet status es menor por lo que de igual manera se envía
-                // finalmente queda que wifiStatus e internetStatus sean iguales de manera que es irrelevante el valor que se envíe
-                if (wifiQuality.ordinal() < internetQuality.ordinal())
-                {
-                    updateCloudLogo(wifiQuality);
-                }
-                else
-                {
-                    updateCloudLogo(internetQuality);
-                }
+                updateUI(wifiQuality,internetQuality);
 
                 // se reestablece el mensaje inicial
                 txtvDiagnosticMessage.setText(R.string.diagnostic_message);
@@ -219,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 connectionQuality = ConnectionQuality.MODERATE;
                 imgvWifiSignal.setImageResource(R.drawable.wifi_moderate);
                 txtvWifiSignal.setText(R.string.moderate);
-                txtvWifiSignal.setTextColor(getResources().getColor(R.color.connection_low, null));
+                txtvWifiSignal.setTextColor(getResources().getColor(R.color.connection_moderate, null));
 
             }
             // Weak < -70 dBm
@@ -229,11 +230,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 connectionQuality = ConnectionQuality.POOR;
                 imgvWifiSignal.setImageResource(R.drawable.wifi_poor);
                 txtvWifiSignal.setText(R.string.poor);
-                txtvWifiSignal.setTextColor(getResources().getColor(R.color.connection_weak, null));
+                txtvWifiSignal.setTextColor(getResources().getColor(R.color.connection_poor, null));
 
             }
 
-            txtvSignal.setText( connectionInfo.getSSID() + ": " + connectionInfo.getRssi() + " " + value + "\n" );
+            txtvSignal.setText(connectionInfo.getSSID() + ": " + connectionInfo.getRssi() + " " + value + "\n");
 
         }
 
@@ -261,13 +262,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case MODERATE:
                 imgvInternetSignal.setImageResource(R.drawable.internet_moderate);
                 txtvInternetSignal.setText(R.string.moderate);
-                txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_low, null));
+                txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_moderate, null));
                 break;
 
             case POOR:
                 imgvInternetSignal.setImageResource(R.drawable.internet_poor);
                 txtvInternetSignal.setText(R.string.poor);
-                txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_weak, null));
+                txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_poor, null));
                 break;
 
             case UNKNOWN:
@@ -284,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             imgvInternetSignal.setImageResource(R.drawable.internet_default);
             txtvInternetSignal.setText(R.string.disconnected);
-            txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_weak, null));
+            txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_poor, null));
 
         }
     }
@@ -298,14 +299,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             case UNKNOWN:
                 resourceId = R.drawable.cloud_default;
-                txtvInstructionMessage.setText(R.string.unknown_instruction);
+                txtvRecommendationMessage.setText(R.string.unknown_instruction);
                 txtvHelpLink.setVisibility(View.VISIBLE);
                 txtvHelpLink.setMovementMethod(LinkMovementMethod.getInstance());
                 break;
 
             case POOR:
                 resourceId = R.drawable.cloud_poor;
-                txtvInstructionMessage.setText(R.string.weak_connection_instruction);
+                txtvRecommendationMessage.setText(R.string.weak_connection_instruction);
                 txtvHelpLink.setVisibility(View.VISIBLE);
                 txtvHelpLink.setMovementMethod(LinkMovementMethod.getInstance());
 
@@ -314,7 +315,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case MODERATE:
                 resourceId = R.drawable.cloud_moderate;
-                txtvInstructionMessage.setText(R.string.low_connection_instruction);
+                txtvRecommendationMessage.setText(R.string.low_connection_instruction);
                 txtvHelpLink.setVisibility(View.VISIBLE);
                 txtvHelpLink.setMovementMethod(LinkMovementMethod.getInstance());
 
@@ -324,21 +325,203 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case GOOD:
             case EXCELLENT:
                 resourceId = R.drawable.cloud_good;
-                txtvInstructionMessage.setText(R.string.good_connection_instruction);
+                txtvRecommendationMessage.setText(R.string.good_connection_instruction);
 
                 break;
         }
 
         Glide.with(this)
                 .load(resourceId)
-                .into(imgvSkypeLogo);
+                .into(imgvMainLogo);
     }
-    
+
+    private void updateUI(ConnectionQuality wifiQuality, ConnectionQuality internetQuality)
+    {
+        rlAlert.setVisibility(View.VISIBLE);
+        int resourceMainLogoId = R.drawable.cloud_default;
+
+        switch (wifiQuality)
+        {
+            case EXCELLENT:
+            case GOOD:
+
+                switch (internetQuality)
+                {
+                    case EXCELLENT:
+                    case GOOD:
+                        // SfB Experience indicator: Good
+                        resourceMainLogoId = R.drawable.cloud_good;
+                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_good,null));
+                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_good,null));
+                        imgvAlert.setImageResource(R.drawable.alert_good);
+                        txtvAlertMessage.setText(R.string.sm_gw_gi);
+                        txtvRecommendationMessage.setText(R.string.rm_gw_gi);
+                        break;
+
+                    case MODERATE:
+                        // SfB Experience indicator: Warning !
+                        resourceMainLogoId = R.drawable.cloud_moderate;
+                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_moderate,null));
+                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_moderate,null));
+                        imgvAlert.setImageResource(R.drawable.alert_moderate);
+                        txtvAlertMessage.setText(R.string.sm_gw_mi);
+                        txtvRecommendationMessage.setText(R.string.rm_gw_mi);
+                        txtvHelpLink.setVisibility(View.VISIBLE);
+                        txtvHelpLink.setMovementMethod(LinkMovementMethod.getInstance());
+                        break;
+
+                    case POOR:
+                        // SfB Experience indicator:  Bad !
+                        resourceMainLogoId = R.drawable.cloud_poor;
+                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_poor,null));
+                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_poor,null));
+                        imgvAlert.setImageResource(R.drawable.alert_poor);
+                        txtvAlertMessage.setText(R.string.sm_gw_pi);
+                        txtvRecommendationMessage.setText(R.string.rm_gw_pi);
+                        txtvHelpLink.setVisibility(View.VISIBLE);
+                        txtvHelpLink.setMovementMethod(LinkMovementMethod.getInstance());
+                        break;
+
+                    case UNKNOWN:
+                        break;
+                }
+
+                break;
+
+            case MODERATE:
+
+                switch (internetQuality)
+                {
+                    case EXCELLENT:
+                    case GOOD:
+                        // SfB Experience indicator: Warning !
+                        resourceMainLogoId = R.drawable.cloud_moderate;
+                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_moderate,null));
+                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_moderate,null));
+                        imgvAlert.setImageResource(R.drawable.alert_moderate);
+                        txtvAlertMessage.setText(R.string.sm_mw_gi);
+                        txtvRecommendationMessage.setText(R.string.rm_mw_gi);
+                        txtvHelpLink.setVisibility(View.VISIBLE);
+                        txtvHelpLink.setMovementMethod(LinkMovementMethod.getInstance());
+                        break;
+
+                    case MODERATE:
+                        // SfB Experience indicator: Warning !
+                        resourceMainLogoId = R.drawable.cloud_moderate;
+                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_moderate,null));
+                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_moderate,null));
+                        imgvAlert.setImageResource(R.drawable.alert_moderate);
+                        txtvAlertMessage.setText(R.string.sm_mw_mi);
+                        txtvRecommendationMessage.setText(R.string.rm_mw_mi);
+                        txtvHelpLink.setVisibility(View.VISIBLE);
+                        txtvHelpLink.setMovementMethod(LinkMovementMethod.getInstance());
+                        break;
+
+                    case POOR:
+                        // SfB Experience indicator:  Bad !
+                        resourceMainLogoId = R.drawable.cloud_poor;
+                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_poor,null));
+                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_poor,null));
+                        imgvAlert.setImageResource(R.drawable.alert_poor);
+                        txtvAlertMessage.setText(R.string.sm_mw_pi);
+                        txtvRecommendationMessage.setText(R.string.rm_mw_pi);
+                        txtvHelpLink.setVisibility(View.VISIBLE);
+                        txtvHelpLink.setMovementMethod(LinkMovementMethod.getInstance());
+                        break;
+
+                    case UNKNOWN:
+                        break;
+                }
+
+                break;
+
+            case POOR:
+
+                switch (internetQuality)
+                {
+                    case EXCELLENT:
+                    case GOOD:
+                        break;
+
+                    case MODERATE:
+                        break;
+
+                    case POOR:
+                        // SfB Experience indicator:  Bad !
+                        resourceMainLogoId = R.drawable.cloud_poor;
+                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_poor,null));
+                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_poor,null));
+                        imgvAlert.setImageResource(R.drawable.alert_poor);
+                        txtvAlertMessage.setText(R.string.sm_pw_pi);
+                        txtvRecommendationMessage.setText(R.string.rm_pw_pi);
+                        txtvHelpLink.setVisibility(View.VISIBLE);
+                        txtvHelpLink.setMovementMethod(LinkMovementMethod.getInstance());
+                        break;
+
+                    case UNKNOWN:
+                        break;
+                }
+
+                break;
+
+            case UNKNOWN:
+
+                switch (internetQuality)
+                {
+                    case EXCELLENT:
+                    case GOOD:
+                        // SfB Experience indicator: Good
+                        resourceMainLogoId = R.drawable.cloud_good;
+                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_good,null));
+                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_good,null));
+                        imgvAlert.setImageResource(R.drawable.alert_good);
+                        txtvAlertMessage.setText(R.string.sm_dw_gi);
+                        txtvRecommendationMessage.setText(R.string.rm_dw_gi);
+                        break;
+
+                    case MODERATE:
+                        // SfB Experience indicator: Warning !
+                        resourceMainLogoId = R.drawable.cloud_moderate;
+                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_moderate,null));
+                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_moderate,null));
+                        imgvAlert.setImageResource(R.drawable.alert_moderate);
+                        txtvAlertMessage.setText(R.string.sm_dw_mi);
+                        txtvRecommendationMessage.setText(R.string.rm_dw_mi);
+                        txtvHelpLink.setVisibility(View.VISIBLE);
+                        txtvHelpLink.setMovementMethod(LinkMovementMethod.getInstance());
+                        break;
+
+                    case POOR:
+                        // SfB Experience indicator:  Bad !
+                        resourceMainLogoId = R.drawable.cloud_poor;
+                        vTopLine.setBackgroundColor(getResources().getColor(R.color.connection_poor,null));
+                        vBottomLine.setBackgroundColor(getResources().getColor(R.color.connection_poor,null));
+                        imgvAlert.setImageResource(R.drawable.alert_poor);
+                        txtvAlertMessage.setText(R.string.sm_dw_pi);
+                        txtvRecommendationMessage.setText(R.string.rm_dw_pi);
+                        txtvHelpLink.setVisibility(View.VISIBLE);
+                        txtvHelpLink.setMovementMethod(LinkMovementMethod.getInstance());
+                        break;
+
+                    case UNKNOWN:
+                        break;
+                }
+
+                break;
+        }
+
+
+        // se establece la imagen del logo principal
+        Glide.with(this)
+                .load(resourceMainLogoId)
+                .into(imgvMainLogo);
+    }
+
     private void resetActivity()
     {
         Glide.with(this)
                 .load(R.drawable.cloud_default)
-                .into(imgvSkypeLogo);
+                .into(imgvMainLogo);
 
         imgvWifiSignal.setImageResource(R.drawable.wifi_default);
         txtvWifiSignal.setText(R.string.unknown);
@@ -353,7 +536,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         txtvSignal.setText("");
 
-        txtvInstructionMessage.setText(R.string.loading_instruction);
+        txtvRecommendationMessage.setText(R.string.loading_instruction);
+
+        rlAlert.setVisibility(View.GONE);
+
 
         txtvHelpLink.setVisibility(View.INVISIBLE);
     }
