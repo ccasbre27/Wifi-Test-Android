@@ -104,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDeviceBandwidthSampler = DeviceBandwidthSampler.getInstance();
 
         customConnectionQuality = new CustomConnectionQuality();
+
+        Glide.with(this).load(R.drawable.cloud_default).into(imgvMainLogo);
     }
 
     public void onClick(View view)
