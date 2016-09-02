@@ -75,8 +75,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         txtvHelpLink.setText(Html.fromHtml("Didn't work? <font color=#36B2E4>Try another options</font>"));
 
-        txtvDiagnosticMessage.setText(Html.fromHtml("Tap to<br><big><b>Start</b></big><br>Diagnostic"));
-
         // click listener de la imagen
         imgvSkypeLogo.setOnClickListener(this);
         txtvHelpLink.setOnClickListener(this);
@@ -86,16 +84,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDeviceBandwidthSampler = DeviceBandwidthSampler.getInstance();
 
 
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     public void onClick(View view)
@@ -147,14 +135,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void checkConnections(final ConnectionQuality internetQuality)
     {
         // delay
-        new CountDownTimer(3000, 1000) {
+        new CountDownTimer(2000, 1000) {
             public void onFinish() {
 
                 // se obtiene la información de la conexión a internet y wifi
                 ConnectionQuality wifiQuality = getWifiStatus();
                 setInternetQuality(internetQuality);
                 //wifiStatus = CONNECTION_STATUS.LOW;
-
 
                 // se verifica si el valor de wifi es menor, si es así entonces se pasa dicho enum para que establezca
                 // la imagen de skype con el valor que le corresponde.
@@ -173,7 +160,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 txtvDiagnosticMessage.setText(R.string.diagnostic_message);
                 progressBar.setVisibility(View.GONE);
 
-
             }
 
             public void onTick(long millisUntilFinished) {
@@ -191,9 +177,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // se verifica si el wifi está habilitado
         if (!mWifiManager.isWifiEnabled())
         {
-            connectionQuality = ConnectionQuality.POOR;
             txtvWifiSignal.setText(R.string.disconnected);
-
             imgvWifiSignal.setImageResource(R.drawable.wifi_default);
         }
         else
@@ -265,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case EXCELLENT:
                 imgvInternetSignal.setImageResource(R.drawable.internet_good);
                 txtvInternetSignal.setText(R.string.excellent);
-                txtvInternetSignal.setTextColor(Color.parseColor(Integer.toHexString(getResources().getColor(R.color.connection_good, null) & 0x00ffffff)));
+                txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_good, null));
                 break;
 
             case GOOD:
@@ -349,8 +333,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .load(resourceId)
                 .into(imgvSkypeLogo);
     }
-
-
+    
     private void resetActivity()
     {
         Glide.with(this)
@@ -359,8 +342,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         imgvWifiSignal.setImageResource(R.drawable.wifi_default);
         txtvWifiSignal.setText(R.string.unknown);
+        txtvWifiSignal.setTextColor(getResources().getColor(R.color.gray, null));
         imgvInternetSignal.setImageResource(R.drawable.internet_default);
         txtvInternetSignal.setText(R.string.unknown);
+        txtvInternetSignal.setTextColor(getResources().getColor(R.color.gray, null));
 
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setIndeterminate(true);

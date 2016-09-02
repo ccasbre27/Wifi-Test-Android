@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Mobile Doctor</string>
-    <string name="diagnostic_message">Tap to Start Diagnostic</string>
+    <string name="diagnostic_message">Tap to\n<big><b>Start</b></big>\nDiagnostic"</string>
     <string name="diagnosting_message">Diagnosting</string>
     <string name="wifi_signal_strength">WIFI signal strength</string>
     <string name="internet_connectivity">Internet connectivity</string>
@@ -40,6 +40,157 @@
         If your modem, or router is old, then everything will
         seem to be running slow even with a fast connection. It
         might be worth upgrading your hardware if all else fails.
+    </string>
+
+    <!-- Summary messages -->
+    <string name="sm_gw_gi">
+        Instant Messaging: OK\n
+        Audio Calls:  OK
+    </string>
+
+    <string name="sm_gw_mi">
+        Instant Messaging: OK\n
+        Audio Calls: Not OK
+    </string>
+
+    <string name="sm_gw_pi">
+        Instant Messaging: Not Ok\n
+        Audio Calls: Not OK
+    </string>
+
+    <string name="sm_mw_gi">
+        Instant Messaging: OK\n
+        Audio Calls: Warning
+    </string>
+
+    <string name="sm_mw_mi">
+        Instant Messaging: OK\n
+        Audio Calls: Not OK
+    </string>
+
+    <string name="sm_mw_pi">
+        Instant Messaging: Not Ok\n
+        Audio Calls: Not OK
+    </string>
+
+    <string name="sm_pw_gi">
+        Should not occur otherwise issue with the measurement thresholds
+    </string>
+
+    <string name="sm_pw_mi">
+        Should not occur otherwise issue with the measurement thresholds
+    </string>
+
+    <string name="sm_pw_pi">
+        Instant Messaging: Not Ok\n
+        Audio Calls: Not OK
+    </string>
+
+    <string name="sm_dw_gi">
+        Instant Messaging: OK\n
+        Audio Calls:  OK
+    </string>
+
+    <string name="sm_dw_mi">
+        Instant Messaging: OK\n
+        Audio Calls: Not OK
+    </string>
+
+    <string name="sm_dw_pi">
+        Instant Messaging: Not OK\n
+        Audio Calls: Not OK
+    </string>
+
+    <!-- Recommendation messages -->
+    <string name="rm_gw_gi">
+        Instant Messaging: OK\n
+        Audio Calls:  OK
+    </string>
+
+    <string name="rm_gw_mi">
+        Instant Messaging: OK\n
+        Audio Calls: Not OK
+    </string>
+
+    <string name="rm_gw_pi">
+        Instant Messaging: Not Ok\n
+        Audio Calls: Not OK
+    </string>
+
+    <string name="rm_mw_gi">
+        Instant Messaging: OK\n
+        Audio Calls: Warning
+    </string>
+
+    <string name="rm_mw_mi">
+        Instant Messaging: OK\n
+        Audio Calls: Not OK
+    </string>
+
+    <string name="rm_mw_pi">
+        Instant Messaging: Not Ok\n
+        Audio Calls: Not OK
+    </string>
+
+    <string name="rm_pw_gi">
+        Should not occur otherwise issue with the measurement thresholds
+    </string>
+
+    <string name="rm_pw_mi">
+        Should not occur otherwise issue with the measurement thresholds
+    </string>
+
+    <string name="rm_pw_pi">
+        Instant Messaging: Not Ok\n
+        Audio Calls: Not OK
+    </string>
+
+    <string name="rm_dw_gi">
+        Instant Messaging: OK\n
+        Audio Calls:  OK
+    </string>
+
+    <string name="rm_dw_mi">
+        Instant Messaging: OK\n
+        Audio Calls: Not OK
+    </string>
+
+    <string name="rm_dw_pi">
+        Instant Messaging: Not OK\n
+        Audio Calls: Not OK
+    </string>
+
+    <!-- Recommendations second screen messages -->
+    <string name="rm2_gw_mi">
+        Place holder screen if more detailed explanation  needed based on pilot feedback
+    </string>
+
+    <string name="rm2_gw_pi">
+        Place holder screen if more detailed explanation  needed based on pilot feedback
+    </string>
+
+    <string name="rm2_mw_mi">
+        Place holder screen if more detailed explanation  needed based on pilot feedback
+    </string>
+
+    <string name="rm2_mw_pi">
+        Place holder screen if more detailed explanation  needed based on pilot feedback
+    </string>
+
+    <string name="rm2_pw_mi">
+        Place holder screen if more detailed explanation  needed based on pilot feedback
+    </string>
+
+    <string name="rm2_pw_pi">
+        Place holder screen if more detailed explanation  needed based on pilot feedback
+    </string>
+
+    <string name="rm2_dw_mi">
+        Place holder screen if more detailed explanation  needed based on pilot feedback
+    </string>
+
+    <string name="rm2_dw_pi">
+        Place holder screen if more detailed explanation  needed based on pilot feedback
     </string>
 
 </resources>
