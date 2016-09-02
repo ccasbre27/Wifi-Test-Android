@@ -52,7 +52,7 @@
 
             <ImageView
                 android:id="@+id/imgvWifi"
-                android:src="@drawable/default_wifi"
+                android:src="@drawable/wifi_default"
                 android:layout_height="50dp"
                 android:layout_width="50dp"
                 android:layout_weight="1"
@@ -61,7 +61,7 @@
 
             <ImageView
                 android:id="@+id/imgvInternet"
-                android:src="@drawable/default_internet"
+                android:src="@drawable/internet_default"
                 android:layout_height="50dp"
                 android:layout_width="50dp"
                 android:layout_weight="1"

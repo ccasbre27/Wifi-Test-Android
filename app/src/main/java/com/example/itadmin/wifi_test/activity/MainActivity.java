@@ -162,11 +162,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // finalmente queda que wifiStatus e internetStatus sean iguales de manera que es irrelevante el valor que se envíe
                 if (wifiQuality.ordinal() < internetQuality.ordinal())
                 {
-                    updateSkypeLogo(wifiQuality);
+                    updateCloudLogo(wifiQuality);
                 }
                 else
                 {
-                    updateSkypeLogo(internetQuality);
+                    updateCloudLogo(internetQuality);
                 }
 
                 // se reestablece el mensaje inicial
@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             connectionQuality = ConnectionQuality.POOR;
             txtvWifiSignal.setText(R.string.disconnected);
 
-            imgvWifiSignal.setImageResource(R.drawable.weak_wifi);
+            imgvWifiSignal.setImageResource(R.drawable.wifi_default);
         }
         else
         {
@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 value = "Excellent";
                 connectionQuality = ConnectionQuality.EXCELLENT;
 
-                imgvWifiSignal.setImageResource(R.drawable.good_wifi);
+                imgvWifiSignal.setImageResource(R.drawable.wifi_good);
                 txtvWifiSignal.setText(R.string.excellent);
                 txtvWifiSignal.setTextColor(getResources().getColor(R.color.connection_good, null));
 
@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 value = "Good";
                 connectionQuality = ConnectionQuality.GOOD;
 
-                imgvWifiSignal.setImageResource(R.drawable.good_wifi);
+                imgvWifiSignal.setImageResource(R.drawable.wifi_good);
                 txtvWifiSignal.setText(R.string.good);
                 txtvWifiSignal.setTextColor(getResources().getColor(R.color.connection_good, null));
 
@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 value = "Moderate ";
                 connectionQuality = ConnectionQuality.MODERATE;
-                imgvWifiSignal.setImageResource(R.drawable.low_wifi);
+                imgvWifiSignal.setImageResource(R.drawable.wifi_moderate);
                 txtvWifiSignal.setText(R.string.moderate);
                 txtvWifiSignal.setTextColor(getResources().getColor(R.color.connection_low, null));
 
@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 value = "Poor";
                 connectionQuality = ConnectionQuality.POOR;
-                imgvWifiSignal.setImageResource(R.drawable.weak_wifi);
+                imgvWifiSignal.setImageResource(R.drawable.wifi_poor);
                 txtvWifiSignal.setText(R.string.poor);
                 txtvWifiSignal.setTextColor(getResources().getColor(R.color.connection_weak, null));
 
@@ -263,31 +263,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (internetQuality)
         {
             case EXCELLENT:
-                imgvInternetSignal.setImageResource(R.drawable.good_internet);
+                imgvInternetSignal.setImageResource(R.drawable.internet_good);
                 txtvInternetSignal.setText(R.string.excellent);
                 txtvInternetSignal.setTextColor(Color.parseColor(Integer.toHexString(getResources().getColor(R.color.connection_good, null) & 0x00ffffff)));
                 break;
 
             case GOOD:
-                imgvInternetSignal.setImageResource(R.drawable.good_internet);
+                imgvInternetSignal.setImageResource(R.drawable.internet_good);
                 txtvInternetSignal.setText(R.string.good);
                 txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_good, null));
                 break;
 
             case MODERATE:
-                imgvInternetSignal.setImageResource(R.drawable.low_internet);
+                imgvInternetSignal.setImageResource(R.drawable.internet_moderate);
                 txtvInternetSignal.setText(R.string.moderate);
                 txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_low, null));
                 break;
 
             case POOR:
-                imgvInternetSignal.setImageResource(R.drawable.weak_internet);
+                imgvInternetSignal.setImageResource(R.drawable.internet_poor);
                 txtvInternetSignal.setText(R.string.poor);
                 txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_weak, null));
                 break;
 
             case UNKNOWN:
-                imgvInternetSignal.setImageResource(R.drawable.default_internet);
+                imgvInternetSignal.setImageResource(R.drawable.internet_default);
                 txtvInternetSignal.setText(R.string.unknown);
                 txtvInternetSignal.setTextColor(getResources().getColor(R.color.gray, null));
                 break;
@@ -298,14 +298,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // check if the internet is disabled
         if(!isNetworkAvailable())
         {
-            imgvInternetSignal.setImageResource(R.drawable.weak_internet);
+            imgvInternetSignal.setImageResource(R.drawable.internet_default);
             txtvInternetSignal.setText(R.string.disconnected);
             txtvInternetSignal.setTextColor(getResources().getColor(R.color.connection_weak, null));
 
         }
     }
 
-    private void updateSkypeLogo(ConnectionQuality status)
+    private void updateCloudLogo(ConnectionQuality status)
     {
         int resourceId = R.drawable.cloud_default;
 
@@ -320,7 +320,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case POOR:
-                resourceId = R.drawable.cloud_weak;
+                resourceId = R.drawable.cloud_poor;
                 txtvInstructionMessage.setText(R.string.weak_connection_instruction);
                 txtvHelpLink.setVisibility(View.VISIBLE);
                 txtvHelpLink.setMovementMethod(LinkMovementMethod.getInstance());
@@ -329,7 +329,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case MODERATE:
-                resourceId = R.drawable.cloud_low;
+                resourceId = R.drawable.cloud_moderate;
                 txtvInstructionMessage.setText(R.string.low_connection_instruction);
                 txtvHelpLink.setVisibility(View.VISIBLE);
                 txtvHelpLink.setMovementMethod(LinkMovementMethod.getInstance());
@@ -357,9 +357,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .load(R.drawable.cloud_default)
                 .into(imgvSkypeLogo);
 
-        imgvWifiSignal.setImageResource(R.drawable.default_wifi);
+        imgvWifiSignal.setImageResource(R.drawable.wifi_default);
         txtvWifiSignal.setText(R.string.unknown);
-        imgvInternetSignal.setImageResource(R.drawable.default_internet);
+        imgvInternetSignal.setImageResource(R.drawable.internet_default);
         txtvInternetSignal.setText(R.string.unknown);
 
         progressBar.setVisibility(View.VISIBLE);
