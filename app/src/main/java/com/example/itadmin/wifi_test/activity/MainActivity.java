@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     ImageView imgvMainLogo;
     TextView txtvDiagnosticMessage;
-    TextView txtvSignal;
     ImageView imgvWifiSignal;
     TextView txtvWifiSignal;
     ImageView imgvInternetSignal;
@@ -77,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // referencia los componentes
         imgvMainLogo = (ImageView) findViewById(R.id.imgvSkype);
         txtvDiagnosticMessage = (TextView) findViewById(R.id.txtvDiagnosticMessage);
-        txtvSignal = (TextView) findViewById(R.id.txtvSignal);
         imgvWifiSignal = (ImageView) findViewById(R.id.imgvWifi);
         txtvWifiSignal = (TextView) findViewById(R.id.txtvWifiStatus);
         imgvInternetSignal = (ImageView) findViewById(R.id.imgvInternet);
@@ -232,8 +230,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 txtvWifiSignal.setTextColor(Color.parseColor(colorConnectionPoor));
 
             }
-
-            txtvSignal.setText(connectionInfo.getSSID() + ": " + connectionInfo.getRssi() + " " + value + "\n");
 
         }
 
@@ -532,8 +528,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setIndeterminate(true);
         txtvDiagnosticMessage.setText(R.string.diagnosting_message);
-
-        txtvSignal.setText("");
 
         txtvRecommendationMessage.setText(R.string.loading_instruction);
 

@@ -42,6 +42,11 @@
         might be worth upgrading your hardware if all else fails.
     </string>
 
+    <string name="bacon">
+        Bacon ipsum dolor amet alcatra ground round short ribs pastrami sausage tail pork chop short loin porchetta kielbasa flank. Cupim shankle chicken salami strip steak. Drumstick pork chop pork belly, andouille beef pastrami sirloin pig tail hamburger tenderloin strip steak ham hock biltong. T-bone beef sausage swine, ham hock venison cow pork belly shankle jowl kevin.
+        Pig corned beef landjaeger tenderloin chicken. Bacon prosciutto rump, sirloin pig ham hock tri-tip chicken. Chicken landjaeger kielbasa corned beef. Sirloin biltong pork chicken tenderloin. Shank short ribs hamburger leberkas kielbasa chicken filet mignon tenderloin ground round tail meatloaf fatback. Swine tongue porchetta tenderloin turkey.
+    </string>
+
     <!-- Summary messages -->
     <string name="sm_gw_gi">
         Instant Messaging: OK\n
@@ -109,31 +114,31 @@
     <string name="rm_gw_mi">
         Insufficient Internet bandwidth for audio calls.\n
         Home Wi-Fi: check internet connectivity with your SP\n
-        Public Wi-Fi: Try to connect to another public Wi-Fi hotspot\n
+        Public Wi-Fi: Try to connect to another public Wi-Fi hotspot
     </string>
 
     <string name="rm_gw_pi">
         Insufficient Internet bandwidth for  SfB.\n
         Home Wi-Fi: check internet connectivity with your SP\n
-        Public Wi-Fi: Try to connect to another hotspot\n
+        Public Wi-Fi: Try to connect to another hotspot
     </string>
 
     <string name="rm_mw_gi">
         Bad SfB audio calls due to degraded Wi-Fi conditions.\n
         Try to get closer to the Wi-Fi Access Point\n
-        Public Wi-Fi: try to connect to another hotspot\n
+        Public Wi-Fi: try to connect to another hotspot
     </string>
 
     <string name="rm_mw_mi">
         Insufficient Internet bandwidth for  SfB audio calls.\n
         Home Wi-Fi: check internet connectivity with your SP\n
-        Public Wi-Fi: Try to connect to another hotspot\n
+        Public Wi-Fi: Try to connect to another hotspot
     </string>
 
     <string name="rm_mw_pi">
         Insufficient Internet bandwidth for  SfB.\n
         Home Wi-Fi: check internet connectivity with your SP\n
-        Public Wi-Fi: Try to connect to another hotspot\n
+        Public Wi-Fi: Try to connect to another hotspot
     </string>
 
     <string name="rm_pw_gi">
@@ -147,7 +152,7 @@
     <string name="rm_pw_pi">
         Insufficient Internet bandwidth for  SfB.\n
         Home Wi-Fi: check internet connectivity with your SP\n
-        Public Wi-Fi: Try to connect to another hotspot\n
+        Public Wi-Fi: Try to connect to another hotspot
     </string>
 
     <string name="rm_dw_gi">
@@ -156,12 +161,12 @@
 
     <string name="rm_dw_mi">
         Insufficient Internet bandwidth for SfB audio calls.\n
-        Use Skype for Business dial-back capability for joining meetings\n
+        Use Skype for Business dial-back capability for joining meetings
     </string>
 
     <string name="rm_dw_pi">
         Insufficient Internet bandwidth for SfB audio calls.\n
-        Use Skype for Business dial-back capability for joining meetings\n
+        Use Skype for Business dial-back capability for joining meetings
     </string>
 
     <!-- Recommendations second screen messages -->
