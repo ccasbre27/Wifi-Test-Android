@@ -2,7 +2,9 @@ package com.example.itadmin.wifi_test.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     DeviceBandwidthSampler mDeviceBandwidthSampler;
     RelativeLayout rlAlert;
 
-    final String mURL = "http://lyncdiscover.hpe.com/dialin";
+    final String mURL = "https://www.google.com/";
 
     int mTries = 0;
 
@@ -124,7 +126,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 resetActivity();
 
-                new CheckInternetAsyncTask().execute();
+                // delay
+                new CountDownTimer(3000, 1000) {
+                    public void onFinish() {
+
+                        new CheckInternetAsyncTask().execute();
+
+                    }
+
+                    public void onTick(long millisUntilFinished) {
+                        // millisUntilFinished    The amount of time until finished.
+                    }
+                }.start();
 
                 break;
         }
@@ -138,32 +151,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return activeNetworkInfo != null;
     }
 
-    public void checkConnections(final ConnectionQuality internetQuality)
+    public void checkConnections(final ConnectionQuality internetQuality )
     {
-        // delay
-        new CountDownTimer(2000, 1000) {
-            public void onFinish() {
 
-                // se obtiene la información de la conexión a internet y wifi
-                ConnectionQuality wifiQuality = getWifiStatus();
-                setInternetQuality(internetQuality);
-                //wifiStatus = CONNECTION_STATUS.LOW;
+        // se obtiene la información de la conexión a internet y wifi
+        ConnectionQuality wifiQuality = getWifiStatus();
+        setInternetQuality(internetQuality);
 
-                customConnectionQuality.wifiQuality = wifiQuality;
-                customConnectionQuality.internetQuality = internetQuality;
+        customConnectionQuality.wifiQuality = wifiQuality;
+        customConnectionQuality.internetQuality = internetQuality;
 
-                updateUI(wifiQuality,internetQuality);
+        updateUI(wifiQuality,internetQuality);
 
-                // se reestablece el mensaje inicial
-                txtvDiagnosticMessage.setText(R.string.diagnostic_message);
-                progressBar.setVisibility(View.GONE);
+        // se reestablece el mensaje inicial
+        txtvDiagnosticMessage.setText(R.string.diagnostic_message);
+        progressBar.setVisibility(View.GONE);
 
-            }
 
-            public void onTick(long millisUntilFinished) {
-                // millisUntilFinished    The amount of time until finished.
-            }
-        }.start();
     }
 
     // obtiene el estado del wifi y devuelve un enum con dicho valor
@@ -378,6 +382,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
 
                     case UNKNOWN:
+                        txtvRecommendationMessage.setText(R.string.first_instruction);
+
+                        rlAlert.setVisibility(View.GONE);
                         break;
                 }
 
@@ -425,6 +432,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
 
                     case UNKNOWN:
+                        txtvRecommendationMessage.setText(R.string.first_instruction);
+
+                        rlAlert.setVisibility(View.GONE);
                         break;
                 }
 
@@ -436,9 +446,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 {
                     case EXCELLENT:
                     case GOOD:
+                        txtvRecommendationMessage.setText(R.string.first_instruction);
+
+                        rlAlert.setVisibility(View.GONE);
                         break;
 
                     case MODERATE:
+                        txtvRecommendationMessage.setText(R.string.first_instruction);
+
+                        rlAlert.setVisibility(View.GONE);
                         break;
 
                     case POOR:
@@ -454,6 +470,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
 
                     case UNKNOWN:
+                        txtvRecommendationMessage.setText(R.string.first_instruction);
+
+                        rlAlert.setVisibility(View.GONE);
                         break;
                 }
 
@@ -533,6 +552,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setIndeterminate(true);
+        progressBar.getIndeterminateDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
         txtvDiagnosticMessage.setText(R.string.diagnosting_message);
 
         txtvRecommendationMessage.setText(R.string.loading_instruction);
@@ -542,6 +562,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         txtvHelpLink.setVisibility(View.INVISIBLE);
     }
+
 
     // descargar json
     class CheckInternetAsyncTask extends AsyncTask<Void, Void, Void> {
@@ -588,6 +609,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (connectionQuality == ConnectionQuality.UNKNOWN && mTries < 5) {
                 mTries++;
                 new CheckInternetAsyncTask().execute();
+            }
+            else if(!isNetworkAvailable())
+            {
+                checkConnections(ConnectionQuality.UNKNOWN);
             }
             else
             {
