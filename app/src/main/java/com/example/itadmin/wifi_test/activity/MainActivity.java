@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             imgvInternetSignal.setImageResource(R.drawable.internet_default);
             txtvInternetSignal.setText(R.string.disconnected);
-            txtvInternetSignal.setTextColor(Color.parseColor(colorConnectionPoor));
+            txtvInternetSignal.setTextColor(Color.parseColor(colorGray));
 
         }
     }
@@ -499,6 +499,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
 
                     case UNKNOWN:
+                        resourceMainLogoId = R.drawable.cloud_default;
+                        vTopLine.setBackgroundColor(Color.parseColor(colorGray));
+                        vBottomLine.setBackgroundColor(Color.parseColor(colorGray));
+                        imgvAlert.setImageResource(R.drawable.alert_default);
+                        txtvAlertMessage.setText(R.string.sm_dw_di);
+                        txtvRecommendationMessage.setText(R.string.rm_dw_di);
                         break;
                 }
 

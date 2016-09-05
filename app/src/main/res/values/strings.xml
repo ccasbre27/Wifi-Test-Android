@@ -106,6 +106,11 @@
         Audio Calls: Not OK
     </string>
 
+    <string name="sm_dw_di">
+        Instant Messaging: Not OK\n
+        Audio Calls: Not OK
+    </string>
+
     <!-- Recommendation messages -->
     <string name="rm_gw_gi">
         Everything looks good, have a nice meeting !
@@ -169,6 +174,10 @@
         Use Skype for Business dial-back capability for joining meetings
     </string>
 
+    <string name="rm_dw_di">
+        Please turn on wifi or mobile data
+    </string>
+
     <!-- Recommendations second screen messages -->
     <string name="rm2_gw_mi">
         Place holder screen if more detailed explanation  needed based on pilot feedback
@@ -201,5 +210,6 @@
     <string name="rm2_dw_pi">
         Place holder screen if more detailed explanation  needed based on pilot feedback
     </string>
+
 
 </resources>
